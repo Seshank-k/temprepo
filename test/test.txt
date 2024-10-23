@@ -1,0 +1,25 @@
+RDDs (Resilient Distributed Datasets)
+RDDs are the core abstraction in Spark. They represent data as collections of elements spread across multiple nodes.
+RDDs support two kinds of operations:
+Transformations: These are lazy operations that produce a new RDD, like map, filter, flatMap, and reduceByKey.
+Actions: These trigger computation and return a result to the driver, like collect, reduce, take, and saveAsText.
+Key features of RDDs:
+Immutable and fault-tolerant.
+They don’t infer schema or optimize queries automatically.
+Useful for unstructured data, but caching/persisting requires manual effort.
+2. DataFrames
+DataFrames are a higher-level abstraction that represent data as tables with rows and schema information.
+They provide powerful APIs for operations like select, filter, groupBy, and join.
+Optimized by the Catalyst Optimizer and Tungsten engine, which improve performance significantly.
+DataFrames also support multiple formats such as CSV, Parquet, and JSON and offer automatic caching.
+Ideal for structured data, and easier to use than RDDs.
+3. Directed Acyclic Graph (DAG)
+A key part of Spark’s architecture is the DAG (Directed Acyclic Graph). Here’s how it works:
+
+When a user submits a Spark job, the Driver program identifies the transformations and actions required.
+It creates a logical flow of operations—this is the DAG.
+The DAG is broken into stages by the DAG Scheduler, and these stages contain tasks to be executed.
+The Task Scheduler sends the tasks to executors in the cluster for processing.
+4. Coalesce vs. Repartition
+Coalesce is used to reduce the number of partitions for optimization. It simply merges partitions without shuffling data.
+Repartition redistributes data by increasing or adjusting partitions, which involves shuffling.
